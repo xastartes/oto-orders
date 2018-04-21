@@ -20,7 +20,7 @@ node ('slave1'){
    }
    def image = ''
    stage ('dockerize'){
-       image = docker.build "otomato/oto-${svcName}:${env.BUILD_NUMBER}"
+       image = docker.build "d1rrected/oto-${svcName}:${env.BUILD_NUMBER}"
    }
     
     stage ('push'){
@@ -58,7 +58,7 @@ node ('slave1'){
 	echo "Staging frontend is at ${STAGING_FRONT_IP}"
 	def STAGING_FRONT_URL = "http://" + STAGING_FRONT_IP.trim() + ":3000"
 	dir('it'){
-	  git 'https://github.com/antweiss/cicd-workshop.git'
+	  git 'https://github.com/d1rrected/cicd-workshop.git'
 	  withEnv(["STAGING_FRONT_URL=${STAGING_FRONT_URL}"]){
 	    sh 'ls'
 	    sh './integration-tests/run.sh'
